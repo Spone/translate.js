@@ -273,3 +273,33 @@ describe('Return array option', function () {
     expect(t('test', { xyz: { foo: 'bar' } })).to.eql(['abc ', { foo: 'bar' }, ' def'])
   })
 })
+
+describe('Namespace notation', function () {
+  var translationsObject = {
+    "test.0": "Nothing",
+    "test.1": "One thing",
+    "test.n": "{0} things"
+  }
+
+  var t = translate(translationsObject)
+
+  it('should return a translated string with the correct plural form (0)', function () {
+    expect(t('test', 0)).to.equal('Nothing')
+  })
+
+  it('should return a translated string with the correct plural form (1)', function () {
+    expect(t('test', 1)).to.equal('One thing')
+  })
+
+  it('should return a translated string with the correct plural form (2)', function () {
+    expect(t('test', 2)).to.equal('2 things')
+  })
+
+  it('should return a translated string with the correct plural form (3)', function () {
+    expect(t('test', 3)).to.equal('3 things')
+  })
+
+  it('should return a translated string with the correct plural form (4)', function () {
+    expect(t('test', 4)).to.equal('4 things')
+  })
+})
